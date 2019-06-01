@@ -28,6 +28,9 @@ class QuestionType extends Component {
   handleChoice = () => {
     if (this.state.addType === false) {
       this.setState({
+        editElement: -1,
+        name:"",
+        acronym:"",
         addType: true
       });
     }
@@ -144,7 +147,8 @@ class QuestionType extends Component {
      console.log(userQuestionType);
    })
     const dummytypeData = this.state.typeData;
-    dummytypeData[this.state.typeData.length + 1] = dummyRecordsData;
+    dummytypeData.unshift(dummyRecordsData);
+    //dummytypeData[this.state.typeData.length + 1] = dummyRecordsData;
     this.setState({
       RecordsData: dummyRecordsData,
       editElement: -1,

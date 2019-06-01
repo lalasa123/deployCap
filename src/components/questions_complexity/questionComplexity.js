@@ -28,6 +28,9 @@ class QuestionComplexity extends Component {
   handleChoice = () => {
     if (this.state.addComplex === false) {
       this.setState({
+        editElement:-1,
+        name:"",
+        acronym:"",
         addComplex: true
       });
     }
@@ -147,7 +150,8 @@ class QuestionComplexity extends Component {
    })
        
     const dummycomplexData = this.state.complexData;
-    dummycomplexData[this.state.complexData.length + 1] = dummyRecordsData;
+    dummycomplexData.unshift(dummyRecordsData);
+   // dummycomplexData[this.state.complexData.length + 1] = dummyRecordsData;
     this.setState({
       RecordsData: dummyRecordsData,
       editElement: -1,

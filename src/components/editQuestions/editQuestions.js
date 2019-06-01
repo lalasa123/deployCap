@@ -71,24 +71,24 @@ class editQuestions extends Component {
                     option4: editQuesData.data.choice[3].name,
                 })
                 editQuesData.data.answer.map((result,i) => {
-                    if(i === 0){
+                    if(result.name === this.state.option1){
                         this.setState({
-                            check1: result
+                            check1: result.name
                         })
                     }
-                    if(i === 1){
+                    if(result.name === this.state.option2){
                         this.setState({
-                            check2: result
+                            check2: result.name
                         })
                     }
-                    if(i === 2){
+                    if(result.name === this.state.option3){
                         this.setState({
-                            check3: result
+                            check3: result.name
                         })
                     }
-                    if(i === 3){
+                    if(result.name === this.state.option4){
                         this.setState({
-                            check4: result
+                            check4: result.name
                         })
                     }
                 })
@@ -171,46 +171,102 @@ class editQuestions extends Component {
                         isRadioSelected:4
                     })
                 }
-                checkChange = (e) => {
-                    if(e.target.checked === false){
-                        this.setState({
-                            [e.target.name] : '',
-                            isCheckboxSelected:1,
-                            //chckBoxAnswer:this.state.chckBoxAnswer.pop(e.target.value)
-                            chckBoxAnswer:this.state.chckBoxAnswer.filter(function(val) {return val!==e.target.value})
+                // checkChange = (e) => {
+                //     if(e.target.checked === false){
+                //         this.setState({
+                //             [e.target.name] : '',
+                //             isCheckboxSelected:1,
+                //             //chckBoxAnswer:this.state.chckBoxAnswer.pop(e.target.value)
+                //             chckBoxAnswer:this.state.chckBoxAnswer.filter(function(val) {return val!==e.target.value})
                            
-                        })
-                        console.log("before else" + this.state.chckBoxAnswer);
+                //         })
+                //         console.log("before else" + this.state.chckBoxAnswer);
             
-                        // console.log(this.state.check1)
-                        //  console.log(this.state.check2)
-                        // console.log(this.state.check3)
-                        // console.log(this.state.check4)
-                    } else if(e.target.checked === true){
-                        var joined = e.target.value;
+                //         // console.log(this.state.check1)
+                //         //  console.log(this.state.check2)
+                //         // console.log(this.state.check3)
+                //         // console.log(this.state.check4)
+                //     } else if(e.target.checked === true){
+                //         var joined = e.target.value;
                         
-                        var newState = this.state.chckBoxAnswer.slice();
-                        newState.push(joined);
+                //         var newState = this.state.chckBoxAnswer.slice();
+                //         newState.push(joined);
             
-                        this.setState({
-                            chckBoxAnswer:this.state.chckBoxAnswer.concat([newState]),
-                            [e.target.name] : e.target.value
-                            // chckBoxAnswer:joined
-                        })
+                //         this.setState({
+                //             chckBoxAnswer:this.state.chckBoxAnswer.concat([newState]),
+                //             [e.target.name] : e.target.value
+                //             // chckBoxAnswer:joined
+                //         })
                         
-                        // console.log(this.state.check1)
-                        //  console.log(this.state.check2)
-                        // console.log(this.state.check3)
-                        // console.log(this.state.check4)
-                        // if(this.state.chckBoxAnswer !== ""){
-                        //     this.setState({
-                        //         isCheckboxSelected:1,
-                        //     })
-                        // }
+                //         // console.log(this.state.check1)
+                //         //  console.log(this.state.check2)
+                //         // console.log(this.state.check3)
+                //         // console.log(this.state.check4)
+                //         // if(this.state.chckBoxAnswer !== ""){
+                //         //     this.setState({
+                //         //         isCheckboxSelected:1,
+                //         //     })
+                //         // }
                        
-                    }
-                    console.log("after else" +this.state.chckBoxAnswer);
+                //     }
+                //     console.log("after else" +this.state.chckBoxAnswer);
                     
+                // }
+                onChangeCheck1 = (e) => {
+                    if(this.state.check1){
+                        this.setState({
+                            check1:''
+                        })
+                    }
+                    else{
+                            this.setState({
+                                check1:e.target.value
+                            })
+                    }                   
+
+                }
+
+                onChangeCheck2 = (e) => {
+                    if(this.state.check2){
+                        this.setState({
+                            check2:''
+                        })
+                    }
+                    else{
+                            this.setState({
+                                check2:e.target.value
+                            })
+                    }
+                    
+                }
+
+                onChangeCheck3 = (e) => {
+                    if(this.state.check3){
+                        this.setState({
+                            check3:''
+                        })
+                    }
+                    else{
+                            this.setState({
+                                check3:e.target.value
+                            })
+                    }
+
+                    
+                }
+
+                onChangeCheck4 = (e) => {
+                    if(this.state.check4){
+                        this.setState({
+                            check4:''
+                        })
+                    }
+                    else{
+                            this.setState({
+                                check4:e.target.value
+                            })
+                    }
+
                 }
                 handleSave(){            
                     console.log(this.state.editQuesData.questiontopic);
@@ -436,18 +492,17 @@ class editQuestions extends Component {
                                 <table className="ans" style={{display:this.state.editQuesData.questiontype === "MCQ" ?'block':'none'}}>
                     <tbody>
                     <tr>
-                         <td><input type="checkbox" className="ans1" name="check1" checked={this.state.check1}  onChange={e => this.checkChange(e)} value={this.state.option1} /></td>
+                         <td><input type="checkbox" className="ans1" name="check1" checked={this.state.check1}  onChange={e => this.onChangeCheck1(e)} value={this.state.option1} /></td>
                         </tr>
                         <tr>
-                         <td><input type="checkbox" className="ans1" name="check2" checked={this.state.check2}  onChange={e => this.checkChange(e)} value={this.state.option2} /></td>
+                         <td><input type="checkbox" className="ans1" name="check2" checked={this.state.check2}  onChange={e => this.onChangeCheck2(e)} value={this.state.option2} /></td>
                         </tr>
                         <tr>
-                         <td><input type="checkbox" className="ans1" name="check3" checked={this.state.check3}  onChange={e => this.checkChange(e)} value={this.state.option3} /></td>
+                         <td><input type="checkbox" className="ans1" name="check3" checked={this.state.check3}  onChange={e => this.onChangeCheck3(e)} value={this.state.option3} /></td>
                         </tr>
                         <tr>
-                         <td><input type="checkbox" className="ans1" name="check4" checked={this.state.check4}  onChange={e => this.checkChange(e)} value={this.state.option4} /></td>
-                        </tr>
-                      <tr><td>  
+                         <td><input type="checkbox" className="ans1" name="check4" checked={this.state.check4}  onChange={e => this.onChangeCheck4(e)} value={this.state.option4} /></td>
+                        </tr>                      <tr><td>  
                         <div id="divbtn" style={{display:this.state.editQuesData.questiontype === "MCQ" ?'block':'none'}}>
                         <button type="button" value="save"  className="btn btn-success" onClick={()=>{this.handleSave()}}  >Save</button>
                         <button type="button" value="Cancel"  className="btn btn-danger" onClick={()=>{this.handleClose()}} >Cancel</button>

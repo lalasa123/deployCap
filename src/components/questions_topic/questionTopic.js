@@ -46,7 +46,11 @@ class QuestionTopic extends Component {
   handleTopic = () => {
       if (this.state.addTopic === false) {
       this.setState({
+         editElement: -1,
+        name: "",
+        acronym: "",
         addTopic: true
+
       });
     }
   }
@@ -59,7 +63,6 @@ class QuestionTopic extends Component {
     }
   }
   handleEdit(data, id) {
-
     this.setState({
       name: data.name,
       acronym: data.acronym,
@@ -156,7 +159,8 @@ class QuestionTopic extends Component {
               console.log(userQuestionTopic);
             })
       const dummytopicData = this.state.topicData;
-      dummytopicData[this.state.topicData.length + 1] = dummyRecord;
+      dummytopicData.unshift(dummyRecord);
+      // dummytopicData[this.state.topicData.length + 1] = dummyRecord;
       this.setState({
         Record: dummyRecord,
         topicData: dummytopicData,

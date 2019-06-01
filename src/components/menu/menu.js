@@ -9,7 +9,7 @@ class Menu extends Component {
     }
     handleLogout(){
         //alert("bye");
-        // localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('isLoggedIn');
         //document.body.addClass('bodyStyle');
         // document.body.classList.add('bodyStyle');
         // return <Redirect to='/login' />
