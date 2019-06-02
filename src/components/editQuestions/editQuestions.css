@@ -109,3 +109,8 @@ input[type=checkbox]{
     width:17px;
     height:17px;
 }
+.question{
+    height: 55px !important;
+    width: 400% !important;
+    margin-left: 52% !important;
+}

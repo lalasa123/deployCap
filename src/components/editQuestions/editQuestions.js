@@ -397,7 +397,8 @@ class editQuestions extends Component {
     render() {
         if (localStorage.getItem('isLoggedIn') === null) {
             return <Redirect to='/login' />
-          }else{
+          }
+          else{
         return (
             <div >
             <Menu />
@@ -462,7 +463,7 @@ class editQuestions extends Component {
                 <table id="tblQpage" text-align="center" >
                         <tbody>
                         <tr><td>
-                            <textarea className="form-control" rows="3" cols="100"  placeholder="Enter Questions" value={this.state.editQuesData.description} onChange={(e)=>{this.handleQuestionsData(e)}}/></td></tr>
+                            <input type='text' className="form-control question" rows="3" cols="100"  defaultValue={this.state.editQuesData.description} onChange={(e)=>{this.handleQuestionsData(e)}}/></td></tr>
                    </tbody></table>
                    <div className="align">
                    <table className="optionTbl" text-align="center">
