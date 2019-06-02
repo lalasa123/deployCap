@@ -24,7 +24,8 @@ const Routes = (props) => {
                 <Route path='/menu/questionType' component={QuestionType} />
                 <Route path='/menu/questions' component={Questions} />
                 <Route path='/menu/answers' component={Answers} />
-                <Route path='/menu/results' component={Results} />                
+                <Route path='/menu/results' component={Results} />  
+                <Route path='/menu/questionsPage' component={QuestionsPage} />              
                 <Route path='/menu/editQuestions' component={editQuestions} />
                 <Route path='/menu/logout' component={Logout} />            
          </Switch>
