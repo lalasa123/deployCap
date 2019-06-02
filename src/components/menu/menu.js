@@ -14,6 +14,7 @@ class Menu extends Component {
         // document.body.classList.add('bodyStyle');
         // return <Redirect to='/login' />
         this.props.history.push('/login')
+        document.body.style = 'background: ;';
     }
     render() {
         return (

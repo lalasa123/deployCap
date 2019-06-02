@@ -59,17 +59,43 @@ class editQuestions extends Component {
               .then(axios.spread((topicData, complexData,typeData,editQuesData) => {
                 // do something with both responses
                 console.log(editQuesData.data)
+                if(topicData.data.length>0){
+                    this.setState({
+                        topicData: topicData.data,
+                    })
+                }
+
+                if(complexData.data.length>0){
+                    this.setState({
+                        complexData: complexData.data,
+                    })
+                }
+
+                if(typeData.data.length>0){
+                    this.setState({
+                        typeData:typeData.data,
+                    })
+                }
+
+                if(editQuesData.data){
+                    this.setState({
+                        editQuesData:editQuesData.data,
+                    })
+                }
+
+                if(editQuesData.data.choice.length>0){
+                    this.setState({
+                        option1: editQuesData.data.choice[0].name,
+                        option2: editQuesData.data.choice[1].name,
+                        option3: editQuesData.data.choice[2].name,
+                        option4: editQuesData.data.choice[3].name,
+                    })
+                }
+
                 this.setState({
-                    topicData: topicData.data,
-                    complexData: complexData.data,
-                    typeData:typeData.data,
-                    editQuesData:editQuesData.data,
-                    isLoaded:true,
-                    option1: editQuesData.data.choice[0].name,
-                    option2: editQuesData.data.choice[1].name,
-                    option3: editQuesData.data.choice[2].name,
-                    option4: editQuesData.data.choice[3].name,
+                    isLoaded:true,   
                 })
+                
                 editQuesData.data.answer.map((result,i) => {
                     if(result.name === this.state.option1){
                         this.setState({
@@ -92,6 +118,7 @@ class editQuestions extends Component {
                         })
                     }
                 })
+            
               }))
         }
     }
@@ -143,6 +170,7 @@ class editQuestions extends Component {
                         option4:e.target.value
                     })
                 }
+                
                 handleAnswer1(e){
                     this.setState({
                         selectedRadio:e,
@@ -212,6 +240,38 @@ class editQuestions extends Component {
                 //     console.log("after else" +this.state.chckBoxAnswer);
                     
                 // }
+                onChangeRadio1(e){
+                    this.setState({
+                        check1:e.target.value,
+                        check2:'',
+                        check3:'',
+                        check4:''
+                    })
+                }
+                onChangeRadio2(e){
+                    this.setState({
+                        check1:'',
+                        check2:e.target.value,
+                        check3:'',
+                        check4:''
+                    })
+                }
+                onChangeRadio3(e){
+                    this.setState({
+                        check1:'',
+                        check2:'',
+                        check3:e.target.value,
+                        check4:''
+                    })
+                }
+                onChangeRadio4(e){
+                    this.setState({
+                        check1:'',
+                        check2:'',
+                        check3:'',
+                        check4:e.target.value
+                    })
+                }
                 onChangeCheck1 = (e) => {
                     if(this.state.check1){
                         this.setState({
@@ -390,7 +450,10 @@ class editQuestions extends Component {
                  })                   
                    this.props.history.push('/menu/questions')
                 }
-            
+                handleClose(){
+                    alert("canceled  successfully");
+                    this.props.history.push('/menu/questions')
+                   }
             
 
                 
@@ -476,10 +539,10 @@ class editQuestions extends Component {
                     </tbody></table>
                     <table className="ans" style={{display:this.state.editQuesData.questiontype === "SCQ" ?'block':'none'}}>
                          <tbody>
-                        <tr><td><input type="radio" className="ans1" checked={this.state.check1 } name="selectedRadio" onChange={(e)=>{this.handleAnswer1(this.state.option1)}} /></td></tr>
-                       <tr><td><input type="radio"   className="ans1" checked={this.state.check2 } onChange={(e)=>{this.handleAnswer2(this.state.option2)}} name="selectedRadio" /></td></tr>
-                        <tr><td><input type="radio"   className="ans1" checked={this.state.check3 }  name="selectedRadio" onChange={(e)=>{this.handleAnswer3(this.state.option3)}}/></td></tr>
-                        <tr><td><input type="radio" className="ans2" checked={this.state.check4 } name="selectedRadio" onChange={(e)=>{this.handleAnswer4(this.state.option4)}} />
+                        <tr><td><input type="radio" className="ans1"  name="selectedRadio" onChange={e => this.onChangeRadio1(e)} value={this.state.option1} /></td></tr>
+                       <tr><td><input type="radio"   className="ans1"   name="selectedRadio" onChange={e => this.onChangeRadio2(e)} value={this.state.option2}/></td></tr>
+                        <tr><td><input type="radio"   className="ans1"   name="selectedRadio" onChange={e => this.onChangeRadio3(e)} value={this.state.option3}/></td></tr>
+                        <tr><td><input type="radio" className="ans2"  name="selectedRadio" onChange={e => this.onChangeRadio4(e)} value={this.state.option4} />
                          </td></tr>
                          <tr><td>
                          <div id="divbtn" style={{display:this.state.editQuesData.questiontype === "SCQ" ?'block':'none'}}>
