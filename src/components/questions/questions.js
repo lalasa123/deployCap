@@ -142,7 +142,7 @@ constructor(props) {
         const idData=this.props.location.search;
             var idvalue =  idData.split("?id=");  
             var id = idvalue.slice(1, 3);
-            alert(id);
+          //  alert(id);
             if(id.length>0){
                 axios.all([
                     axios.get(`http://35.165.114.91:5000/questions/topicdetails/${id}/`),
@@ -221,7 +221,8 @@ handleTopic=(e)=>{
                  
                  console.log(res.data.topiclistques)
                  this.setState({
-                    questionsDatas:[...res.data.topiclistques]
+                    questionsDatas:[...res.data.topiclistques],
+                    isLoaded:true
                 })
              })              
  
@@ -253,8 +254,7 @@ handleTopic=(e)=>{
        
        </select> 
        </div>
-                   
-               
+                                 
                 <div className="alert" style={{display: this.state.error === true ? 'block':'none'}}>
                     <span className="closebtn" onClick={()=>{this.handleClick()}}>&times;</span>
                     <strong>Please Enter Details....</strong>
@@ -266,6 +266,8 @@ handleTopic=(e)=>{
           </p>
         </div>
         <br />
+
+        
         <div className="card">  {/*  Bootstrap cards  */}
         <div className="card-body">
                     <table id="tblQues" className="table" style={{display: this.state.isLoaded === true ? 'inline-table' : 'none'}} >

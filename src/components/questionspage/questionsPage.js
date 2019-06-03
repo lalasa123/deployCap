@@ -247,7 +247,7 @@ this.setState({
             answer: f
             
         }
-        alert(userQuestion);
+       // alert(userQuestion);
         console.log(userQuestion);
         axios.post('http://35.165.114.91:5000/questions/addquestionchoiceans/',userQuestion)
         .then(res =>{
@@ -311,7 +311,7 @@ this.setState({
        this.props.history.push('/menu/questions')
     }
     handleClose(){
-     alert("canceled  successfully");
+    // alert("canceled  successfully");
      this.props.history.push('/menu/questions')
     }
     componentWillMount() {

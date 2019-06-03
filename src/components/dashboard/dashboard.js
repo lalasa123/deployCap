@@ -42,9 +42,15 @@ handleTile(tile) {
             return <Redirect to='/login' />
           }
         else{
+          
          return(
-
+          
             <div >
+              <div className="image-container" style={{ display: this.state.isLoaded === false ? 'block' : 'none' }}>
+          <p className="image-holder">
+            <img  src={require('.././12345.gif')}  alt=""/>
+          </p>
+        </div>
         <Menu />
         <main className="grid">
         {          
