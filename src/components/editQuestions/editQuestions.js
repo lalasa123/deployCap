@@ -18,6 +18,7 @@ class editQuestions extends Component {
             typeData:[],
             complexData:[],
             isLoaded:false,
+            isEnabled:'',
             check1: '',
             check2: '',
             check3: '',
@@ -80,6 +81,7 @@ class editQuestions extends Component {
                 if(editQuesData.data){
                     this.setState({
                         editQuesData:editQuesData.data,
+                        isEnabled:editQuesData.data.questiontype
                     })
                 }
 
@@ -126,6 +128,7 @@ class editQuestions extends Component {
     handleTypeDropdown = (e) => {
             this.setState({
                 typeDropdownValue:e.target.value,
+                isEnabled:''
             
     })      
        console.log(this.state.typeDropdownValue);
@@ -537,7 +540,7 @@ class editQuestions extends Component {
                         <tr><td className="options"><label className="optLbl">c.</label><input type="text" className="form-control" onChange={(e)=>{this.handleOption3(e)}} value={this.state.option3} /></td></tr>
                             <tr><td className="options"><label className="optLbl">d.</label><input type="text" className="form-control" onChange={(e)=>{this.handleOption4(e)}} value={this.state.option4} /></td></tr>
                     </tbody></table>
-                    <table className="ans" style={{display:this.state.editQuesData.questiontype === "SCQ" ?'block':'none'}}>
+                    <table className="ans" style={{display:this.state.isEnabled === "SCQ" || this.state.typeDropdownValue === "Single Choice Question"  ?'block':'none'}}>
                          <tbody>
                         <tr><td><input type="radio" className="ans1"  name="selectedRadio" onChange={e => this.onChangeRadio1(e)} value={this.state.option1} /></td></tr>
                        <tr><td><input type="radio"   className="ans1"   name="selectedRadio" onChange={e => this.onChangeRadio2(e)} value={this.state.option2}/></td></tr>
@@ -553,7 +556,7 @@ class editQuestions extends Component {
                     </tbody>
                     </table> 
                                                       
-                                <table className="ans" style={{display:this.state.editQuesData.questiontype === "MCQ" ?'block':'none'}}>
+                                <table className="ans" style={{display:this.state.isEnabled === "MCQ" || this.state.typeDropdownValue === "Multiple Choice Question" ?'block':'none'}}>
                     <tbody>
                     <tr>
                          <td><input type="checkbox" className="ans1" name="check1" checked={this.state.check1}  onChange={e => this.onChangeCheck1(e)} value={this.state.option1} /></td>

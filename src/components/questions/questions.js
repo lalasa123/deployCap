@@ -138,24 +138,54 @@ constructor(props) {
     }
     componentWillMount() {
         if (localStorage.getItem('isLoggedIn') != null) {
-        axios.all([
-        axios.get('http://35.165.114.91:5000/questions/getquestion/'),
-        axios.get('http://35.165.114.91:5000/questions/complexity/'),
-        axios.get('http://35.165.114.91:5000/questions/topic/')
-      ])
-      .then(axios.spread((questionsDatas, complexDropdownData,topicData) => {
-        // do something with both responses
-        
+       
+        const idData=this.props.location.search;
+            var idvalue =  idData.split("?id=");  
+            var id = idvalue.slice(1, 3);
+            alert(id);
+            if(id.length>0){
+                axios.all([
+                    axios.get(`http://35.165.114.91:5000/questions/topicdetails/${id}/`),
+                    axios.get('http://35.165.114.91:5000/questions/complexity/'),
+                    axios.get('http://35.165.114.91:5000/questions/topic/')
+                  ])
+                  .then(axios.spread((res, complexDropdownData,topicData) => {
+                    console.log("=========="+res.data.topiclistques)
+                    this.setState({
+                       questionsDatas:[...res.data.topiclistques],
+                       complexDropdownData: complexDropdownData.data,
+                       topicDropdownData:topicData.data,
+                       isLoaded:true
+                   })
+                }))
+            }
+            else{
+                axios.all([
+                    axios.get('http://35.165.114.91:5000/questions/getquestion/'),
+                    axios.get('http://35.165.114.91:5000/questions/complexity/'),
+                    axios.get('http://35.165.114.91:5000/questions/topic/')
+                  ])
+                  .then(axios.spread((questionsDatas, complexDropdownData,topicData) => {
+
+                   
+                    // do something with both responses
+                    
         this.setState({
                         questionsDatas: questionsDatas.data,
                         complexDropdownData: complexDropdownData.data,
                         topicDropdownData:topicData.data,
                       isLoaded:true
                     })
+                
       }))
-     
     }
+        
+    }
+
+      
         }
+        
+
       handleClick(){
         this.setState({
             error:false
@@ -246,7 +276,7 @@ handleTopic=(e)=>{
                             </tr>
                         </thead>
                         <tbody>
-                            {console.log(this.state.questionsDatas)}
+                            {console.log("---"+this.state.questionsDatas)}
                             {this.state.questionsDatas.map((questionsData,index) => {
                                 return <tr key={index}>
                                     {/* <td>{questionsData.url.split('/')[5]}</td> */}

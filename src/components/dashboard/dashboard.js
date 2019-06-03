@@ -26,6 +26,10 @@ class Dashboard extends Component{
   }
 }    
 
+handleTile(tile) {
+  this.props.history.push(`/menu/questions?id=${tile}`)
+}
+
     //  componentWillMount(){
     //   const receivedData=localStorage.getItem(JSON.stringify(isLoggedin)); 
     //      if(!receivedData){
@@ -47,7 +51,7 @@ class Dashboard extends Component{
           topicData.map(topic =>{
           const tname= topic.name
           return   (            
-              <NavLink to='/menu/questions' className="tiles" >
+              <div onClick = {() => this.handleTile(tname)} className="tiles" >
                 <div className="tiles">
                 <div class="image">
     <img src={require('.././img1.jpg')} alt="Sample photo" />
@@ -57,7 +61,7 @@ class Dashboard extends Component{
         <button>{topic.name}</button>
    </div> */}
           </div>    
-              </NavLink>          
+              </div>          
              )
          })
          

@@ -159,7 +159,7 @@ this.setState({
         if(e.target.checked === false){
             this.setState({
                 [e.target.name] : '',
-                isCheckboxSelected:1,
+                isCheckboxSelected:'',
                 //chckBoxAnswer:this.state.chckBoxAnswer.pop(e.target.value)
                 chckBoxAnswer:this.state.chckBoxAnswer.filter(function(val) {return val!==e.target.value})
                
@@ -178,7 +178,8 @@ this.setState({
 
             this.setState({
                 chckBoxAnswer:this.state.chckBoxAnswer.concat([newState]),
-                [e.target.name] : e.target.value
+                [e.target.name] : e.target.value,
+                isCheckboxSelected:1,
                 // chckBoxAnswer:joined
             })
             

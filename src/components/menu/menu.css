@@ -268,8 +268,8 @@ li a {
   }
   
   .nav-menu ul li:hover > .navlink {
-    background: #12b6a8;
-    color: #fff;
+    background: #fff;
+    color: #777;
   }
   
   
