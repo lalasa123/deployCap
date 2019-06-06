@@ -14,7 +14,7 @@ class Dashboard extends Component{
   }
   componentWillMount() {
     if (localStorage.getItem('isLoggedIn') != null) {
-    axios.get("http://127.0.0.1:8000/questions/topic/")
+    axios.get("http://35.165.114.91:5000/questions/topic/")
       .then(response => {
         console.log(response.data);
         const topicData = response.data;
