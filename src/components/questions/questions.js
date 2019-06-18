@@ -142,8 +142,10 @@ constructor(props) {
         const idData=this.props.location.search;
             var idvalue =  idData.split("?id=");  
             var id = idvalue.slice(1, 3);
+            console.log(id);
           //  alert(id);
             if(id.length>0){
+                
                 axios.all([
                     axios.get(`http://35.165.114.91:5000/questions/topicdetails/${id}/`),
                     axios.get('http://35.165.114.91:5000/questions/complexity/'),
@@ -215,6 +217,7 @@ handleTopic=(e)=>{
 
            const topicData=e.target.value
            console.log(topicData);
+           if(topicData !== "--All--"){
  axios.get(`http://35.165.114.91:5000/questions/topicdetails/${topicData}/`)
  
              .then(res=>{
@@ -225,7 +228,26 @@ handleTopic=(e)=>{
                     isLoaded:true
                 })
              })              
- 
+            } else{
+                axios.all([
+                    axios.get('http://35.165.114.91:5000/questions/getquestion/'),
+                    axios.get('http://35.165.114.91:5000/questions/complexity/'),
+                    axios.get('http://35.165.114.91:5000/questions/topic/')
+                  ])
+                  .then(axios.spread((questionsDatas, complexDropdownData,topicData) => {
+
+                   
+                    // do something with both responses
+                    
+        this.setState({
+                        questionsDatas: questionsDatas.data,
+                        complexDropdownData: complexDropdownData.data,
+                        topicDropdownData:topicData.data,
+                      isLoaded:true
+                    })
+                
+      }))
+    }
 }
 
     render() {
@@ -245,7 +267,7 @@ handleTopic=(e)=>{
                
          <div class="topicDrpdwn">
          <select className="form-control" onChange={this.handleTopic}  id="myInput">
-         <option>--select--</option>
+         <option>--All--</option>
     {this.state.topicDropdownData.map(drpTopicData =>{
         return(
                 <option value={drpTopicData.name}>{ drpTopicData.name}</option>
